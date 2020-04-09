@@ -7,16 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/2020-Winter-ITE-5430-A/project-server-donald-trump-s-barbers.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/2020-Winter-ITE-5430-A/project-server-donald-trump-s-barbers/issues"
-  },
-  "homepage": "https://github.com/2020-Winter-ITE-5430-A/project-server-donald-trump-s-barbers#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
