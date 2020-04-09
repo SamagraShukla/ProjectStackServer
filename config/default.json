@@ -1,0 +1,4 @@
+{
+    "mongoDBConnectURI" : "mongodb+srv://peddi:gViOsv1azH93CtOt@cluster0-nvvcv.mongodb.net/project_stack?retryWrites=true&w=majority",
+    "jwtsecret": "secret"
+}
