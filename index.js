@@ -5,7 +5,7 @@ const itemRoute = require('./routes/api/items');
 const orderRoute = require('./routes/api/orders');
 const locationRoute = require('./routes/api/location.js');
 const couponRoute = require('./routes/api/coupons');
-const applicationRoute = require('./routes/api/application');
+//const applicationRoute = require('./routes/api/application');
 
 
 
@@ -36,7 +36,7 @@ app.use('/api/technicalqueries', queryRouter);
 app.use('/api/tablebookings', tableBookingRouter);
 
 app.use('/api/coupons', couponRoute);
-app.use('/api/application', applicationRoute);
+//app.use('/api/application', applicationRoute);
 
 app.listen(process.env.PORT || 5001);
 
