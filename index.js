@@ -35,7 +35,6 @@ app.use('/api/inventories', inventoryRouter);
 app.use('/api/technicalqueries', queryRouter);
 app.use('/api/tablebookings', tableBookingRouter);
 
-app.use('/api/user', userRoute);
 app.use('/api/coupons', couponRoute);
 app.use('/api/application', applicationRoute);
 
