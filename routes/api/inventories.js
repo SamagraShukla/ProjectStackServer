@@ -2,13 +2,14 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 
 let Inventory = require('../../models/Inventory');
+const auth = require('../../middleware/auth');
 
 const router = express.Router();
 
 //route Get api/inventories
 //desc Get all inventories
 //access public
-router.get('/', async (req,res) => {
+router.get('/', auth,async (req,res) => {
     try{
         const InventoryDB = await Inventory.find();
         res.json(InventoryDB);
@@ -20,7 +21,7 @@ router.get('/', async (req,res) => {
 //route Get api/inventories/:id
 //desc Get all inventories by id
 //access public 
-router.get('/:id', async (req,res) => {
+router.get('/:id', auth, async (req,res) => {
     try{
         const inventory = await Inventory.findById(req.params.id);
         if(!inventory){
@@ -36,7 +37,7 @@ router.get('/:id', async (req,res) => {
 //route post api/inventories
 //desc insert inventories
 //access public 
-router.post('/', [
+router.post('/', auth, [
     check('product', 'Product is required').not().isEmpty(),
     check('description', 'Description is required').not().isEmpty(),
     check('quantity', 'Quantity is required').not().isEmpty()
@@ -67,7 +68,7 @@ router.post('/', [
 //route update api/inventories/:id
 //desc update all inventories by id
 //access public 
-router.put('/update/:id', async (req,res) => {
+router.put('/update/:id', auth, async (req,res) => {
     
     const inventoryUpdate = await Inventory.findById(req.params.id);
     
@@ -85,7 +86,7 @@ router.put('/update/:id', async (req,res) => {
 //route delete api/inventories/:id
 //desc delete all inventorie by id
 //access public 
-router.delete('/:id', async (req,res) => {
+router.delete('/:id', auth, async (req,res) => {
     try {
         // find the element
         await Inventory.findByIdAndRemove({_id:req.params.id});    
