@@ -1,10 +1,10 @@
 const express = require('express');
 
-let application = require('../../models/Application');
+let application = require('../../models/application');
 const router = express.Router();
-//const validatePhoneNumber = require('validate-phone-number-node-js');   //  npm i validate-phone-number-node-js
+const validatePhoneNumber = require('validate-phone-number-node-js');   //  npm i validate-phone-number-node-js
 const { check, validationResult } = require('express-validator');
-
+const auth = require('../../middleware/auth');
 const config = require('config');
 
 
@@ -91,10 +91,13 @@ router.post('/',[
   //route delete api/application/:email
   //desc delete application by email
   //access by admin
-  router.delete('/', async (req, res) => {
+  router.delete('/:id', //auth,
+   async (req, res) => {
     try {
       // find the element
-      await User.findByIdAndRemove({ _email: req.body.email });
+      //await User.findByIdAndRemove({ _email: req.body.email });
+
+      await application.findByIdAndRemove({_id:req.params.id});  
   
       res.json({ msg: 'application deleted' });
     } catch (err) {
