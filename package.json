@@ -1,13 +1,22 @@
 {
-  "name": "serverapp",
+  "name": "project-server-donald-trump-s-barbers",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "| Task Name                                                                             |    POC     |   Status  |\r | --------------------------------------------------------------------------------------|:----------:|:---------:|\r | Order Management - Menu CRUD for placing Orders | Pradeep       |Done      |\r | Order Management - Orders CRUD| Pradeep       |Done      |\r | Order Management - User Auth to Perform Orders CRUD| Pradeep       |Done      |",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2020-Winter-ITE-5430-A/project-server-donald-trump-s-barbers.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2020-Winter-ITE-5430-A/project-server-donald-trump-s-barbers/issues"
+  },
+  "homepage": "https://github.com/2020-Winter-ITE-5430-A/project-server-donald-trump-s-barbers#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -19,6 +28,8 @@
     "mongoose": "^5.9.7",
     "mongoose-type-phone": "^1.0.1",
     "nodemailer": "^6.4.6",
+    "nodemon": "^2.0.2",
+    "sort-by-distance": "^1.1.0",
     "uuid": "^7.0.3",
     "validate-phone-number-node-js": "0.0.1"
   }
