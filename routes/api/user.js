@@ -22,10 +22,10 @@ router.post(
       check('mobile', 'Please enter correct mobile').isLength({
         min: 10
       }),
-      check('password', 'please enter password with 8 or more').isLength({
+      check('password', 'Please enter password with 8 or more').isLength({
         min: 8
       }),
-      check('password1', 'please enter password with 8 or more').isLength({
+      check('password1', 'Please enter password with 8 or more').isLength({
         min: 8
       }),
       check('is_admin', 'Unable to process request..please contact support').not()
@@ -87,7 +87,9 @@ router.post(
     '/',
     [
       check('email', 'Please include valid email').isEmail(),
-      check('password', 'Password is required').exists()
+      check('password', 'Password is required').exists(),
+      check('is_admin', 'Unable to process request..please contact support').not()
+      .isEmpty()
     ],
     async (req, res) => {
       const errors = validationResult(req);
@@ -95,14 +97,14 @@ router.post(
         return res.status(400).json({ errors: errors.array() });
       }
   
-      const { email, password } = req.body;
+      const { email, password, is_admin } = req.body;
       try {
         //see if user exists
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ email , is_admin});
         if (!user) {
           return res
             .status(400)
-            .json({ errors: [{ msg: 'invalid credentials' }] });
+            .json({ error: [{ msg: 'Invalid credentials' }] });
         }
   
         const isMatch = await bcrypt.compare(password, user.password);
@@ -110,13 +112,14 @@ router.post(
         if (!isMatch) {
           return res
             .status(400)
-            .json({ errors: [{ msg: 'invalid credentials' }] });
+            .json({ error: [{ msg: 'Invalid credentials' }] });
         }
         //get user info for payload from mongo
         const payload = {
           user: {
             id: user.id,
-            name: user.name
+            name: user.name,
+            is_admin : user.is_admin
           }
         };
   
@@ -126,7 +129,7 @@ router.post(
           { expiresIn: 36000 },
           (err, token) => {
             if (err) throw err;
-            res.json({ token });
+            res.json({ "token" : token});
           }
         );
       } catch (err) {
