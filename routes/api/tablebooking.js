@@ -2,13 +2,14 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 
 let TableBooking = require('../../models/Tablebooking');
+const auth = require('../../middleware/auth');
 
 const router = express.Router();
 
 //route Get api/tablebookings
 //desc Get all tablebookings
 //access public
-router.get('/', async (req,res) => {
+router.get('/', auth, async (req,res) => {
     try{
         const BookingDB = await TableBooking.find();
         res.json(BookingDB);
@@ -20,9 +21,9 @@ router.get('/', async (req,res) => {
 //route Get api/tablebookings/:id
 //desc Get all tablebookings by id
 //access public 
-router.get('/:id', async (req,res) => {
+router.get('/:id', auth, async (req,res) => {
     try{
-        const booking = await TableBooking.findById(req.body.id);
+        const booking = await TableBooking.findById(req.params.id);
         if(!booking){
             return res.status(404).send('TableBooking not found');
         }
@@ -36,7 +37,7 @@ router.get('/:id', async (req,res) => {
 //route post api/tablebookings
 //desc insert technicalquery
 //access public 
-router.post('/', [
+router.post('/', auth,[
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Email is required').not().isEmpty(),
     check('noOfPerson', 'Number Of Person is required').not().isEmpty()
@@ -68,9 +69,9 @@ router.post('/', [
 //route update api/tablebookings/:id
 //desc update all tablebookings by id
 //access public 
-router.put('/update/:id', async (req,res) => {
+router.put('/update/:id', auth, async (req,res) => {
     
-    const bookingUpdate = await TableBooking.findById(req.body.id);
+    const bookingUpdate = await TableBooking.findById(req.params.id);
     
     bookingUpdate.name = req.body.name;
     bookingUpdate.email = req.body.email;
@@ -86,11 +87,11 @@ router.put('/update/:id', async (req,res) => {
 //route delete api/tablebookings/:id
 //desc delete technicalquery by id
 //access public 
-router.delete('/:id', async (req,res) => {
+router.delete('/:id', auth, async (req,res) => {
     try {
         // find the element
-        await TableBooking.findByIdAndRemove({_id:req.body.id});    
-        res.json({ msg: 'Booking deleted' });
+        await TableBooking.findByIdAndRemove({_id:req.params.id});    
+        res.json({ status:0 , msg: 'Booking deleted' });
       } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
