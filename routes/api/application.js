@@ -1,6 +1,6 @@
 const express = require('express');
 
-let application = require('../../models/application');
+let application = require('../../models/Application');
 const router = express.Router();
 //const validatePhoneNumber = require('validate-phone-number-node-js');   //  npm i validate-phone-number-node-js
 const { check, validationResult } = require('express-validator');
